@@ -9,6 +9,11 @@ const App = () => {
 
   const newId = useRef(0)
 
+  /**
+   blogWrite 에서는 내가 텍스트에디터에서 입력한 값을 안받아도되는건지 , 아니면 받아야하는데
+   내가 추가를 안한건지 ..
+   */
+
   const blogWrite = (title, subtitle, badgeList, image) => {
     // id값을 어떻게 ?
     const newDate = new Date().getTime();
