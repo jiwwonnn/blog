@@ -11,14 +11,14 @@ const App = () => {
 
   const blogWrite = (title, subtitle, badgeList, image) => {
     // id값을 어떻게 ?
-    const newData = new Date().getTime();
+    const newDate = new Date().getTime();
     const newBlogWrite = {
       id: newId.current,
       image,
       title,
       subtitle,
       badgeList,
-      newData,
+      newDate,
     }
     newId.current += 1
     setData([newBlogWrite, ...data])

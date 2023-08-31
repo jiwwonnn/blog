@@ -1,18 +1,30 @@
 // Toast 에디터
 import { Editor } from '@toast-ui/react-editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
-import {useState} from "react";
+import {useRef, useState} from "react";
 
 
 const Write = ({ blogWrite }) => {
+
+
+  /**
+   에디터에 name 에러 나오는거랑
+   에디터도 image, title .. 넣는곳에 cotnent 라고 넣고 할 수 있는 방법이 있는지 찾아야할듯
+   따로 관리해야될것 같은데 따로 관리하면 blogWrite 에서 새로 만드는 함수를 만들었는데 여기에 추가를
+   어떻게 해야할지 모르겠음
+   */
+
+
+  const editorRef = useRef(null)
 
   const [state, setState] = useState({
     image: '',
     title: '',
     subtitle: '',
     badge: '',
-    content: '',
   })
+
+  const [content, setContent] = useState('')
 
 
   console.log(state.content, "STATE_CONTENT !!")
@@ -22,12 +34,17 @@ const Write = ({ blogWrite }) => {
       ...state,
     [e.target.name] : e.target.value
     })
+
+  }
+
+  const handleContentChange = () => {
+    setContent(editorRef.current.getInstance().getHTML())
   }
 
   const handleSubmit = () => {
     blogWrite(state.title, state.subtitle, state.badge, state.image)
 
-    console.log(state, "STATE!!!!!!!")
+    console.log(content, "STATE!!!!!!!")
   }
 
   return (
@@ -76,7 +93,9 @@ const Write = ({ blogWrite }) => {
           previewStyle="vertical" // 미리보기 스타일 지정
           height="350px" // 에디터 창 높이
           initialEditType="wysiwyg" // 초기 입력모드 설정(디폴트 markdown)
-          initialValue= {state.content}
+          initialValue= ' '
+          ref={editorRef}
+          onChange={handleContentChange}
           toolbarItems={[
             // 툴바 옵션 설정
             ['heading', 'bold', 'italic', 'strike'],
@@ -85,8 +104,6 @@ const Write = ({ blogWrite }) => {
             ['table', 'image', 'link'],
             ['code', 'codeblock']
           ]}
-          name={'content'}
-          onChange={handleStateChange}
         ></Editor>
       </div>
       <div className="button_wrap">
