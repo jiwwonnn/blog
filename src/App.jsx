@@ -14,7 +14,7 @@ const App = () => {
    내가 추가를 안한건지 ..
    */
 
-  const blogWrite = (title, subtitle, badgeList, image) => {
+  const blogWrite = (title, subtitle, badgeList, image, info) => {
     // id값을 어떻게 ?
     const newDate = new Date().getTime();
     const newBlogWrite = {
@@ -24,6 +24,7 @@ const App = () => {
       subtitle,
       badgeList,
       newDate,
+      info
     }
     newId.current += 1
     setData([newBlogWrite, ...data])

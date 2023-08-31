@@ -1,7 +1,7 @@
 // Toast 에디터
 import { Editor } from '@toast-ui/react-editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
-import {useRef, useState} from "react";
+import {useCallback, useRef, useState} from "react";
 
 
 const Write = ({ blogWrite }) => {
@@ -24,10 +24,9 @@ const Write = ({ blogWrite }) => {
     badge: '',
   })
 
-  const [content, setContent] = useState('')
-
-
-  console.log(state.content, "STATE_CONTENT !!")
+  const [content, setContent] = useState({
+    info : ''
+  })
 
   const handleStateChange = (e) => {
     setState({
@@ -37,14 +36,22 @@ const Write = ({ blogWrite }) => {
 
   }
 
-  const handleContentChange = () => {
-    setContent(editorRef.current.getInstance().getHTML())
-  }
+  const handleContentChange = useCallback(() => {
+    // 객체 안에 동일하게 넣어줘야함
+    // setContent(
+    //   editorRef.current.getInstance().getMarkdown()
+    // );
+    // 이거는 안댐
+
+    setContent({
+      info : editorRef.current.getInstance().getMarkdown()
+    });
+  }, [content])
 
   const handleSubmit = () => {
-    blogWrite(state.title, state.subtitle, state.badge, state.image)
+    blogWrite(state.title, state.subtitle, state.badge, state.image, content.info)
 
-    console.log(content, "STATE!!!!!!!")
+    console.log(state , content)
   }
 
   return (
@@ -96,6 +103,7 @@ const Write = ({ blogWrite }) => {
           initialValue= ' '
           ref={editorRef}
           onChange={handleContentChange}
+          name={'info'}
           toolbarItems={[
             // 툴바 옵션 설정
             ['heading', 'bold', 'italic', 'strike'],
