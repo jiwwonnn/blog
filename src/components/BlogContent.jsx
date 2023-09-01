@@ -1,24 +1,24 @@
-const BlogContent = ({ dummyData }) => {
+const BlogContent = ({ data }) => {
 
   return (
     <>
       {
-        dummyData.map((data) => (
-          <div className='blog_content' key={data.id}>
+        data.map((it) => (
+          <div className='blog_content' key={it.id}>
             <div className="img_wrap">
-              <img src='' alt=""/>
+              <img src={it.image} alt=""/>
             </div>
             {/*title 클릭하면 상세로 이동*/}
-            <div className="title">{data.title}</div>
-            <div className="sub_title">{data.subtitle}</div>
+            <div className="title">{it.title}</div>
+            <div className="sub_title">{it.subtitle}</div>
             <ul className="badge_wrap">
                 {
-                  data.badgeList.map((badge, idx) => (
+                  it.badgeList.map((badge, idx) => (
                     <li className="badge" key={idx}>{badge}</li>
                   ))
                 }
             </ul>
-            <div className="date">{data.date}</div>
+            <div className="date">{it.date}</div>
           </div>
         ))
       }

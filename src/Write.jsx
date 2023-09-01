@@ -2,6 +2,7 @@
 import { Editor } from '@toast-ui/react-editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import {useCallback, useRef, useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 
 const Write = ({ blogWrite }) => {
@@ -16,12 +17,15 @@ const Write = ({ blogWrite }) => {
 
 
   const editorRef = useRef(null)
+  const navigate = useNavigate()
+
 
   const [state, setState] = useState({
     image: '',
     title: '',
     subtitle: '',
-    badge: '',
+    badge: [],
+    badgeText: '',
     info : '',
   })
 
@@ -48,8 +52,30 @@ const Write = ({ blogWrite }) => {
       ...state,
     [e.target.name] : e.target.value
     })
-
   }
+
+  const handleBadgeInputChange = (e) => {
+    setState({
+      ...state,
+      badgeText: e.target.value
+    })
+  }
+
+  const handleBadgeInputKeyPress = (e) => {
+    if (e.key === "Enter") {
+      // Enter 키가 눌렸을 때
+      if (state.badgeText.trim() !== "") {
+        // 입력 텍스트가 비어 있지 않은 경우에만 처리
+        const updatedBadges = [...state.badge, state.badgeText]; // 새로운 뱃지를 기존 뱃지 목록에 추가
+        setState({
+          ...state,
+          badge: updatedBadges,
+          badgeText: "", // badge 입력 텍스트 지우기
+        });
+      }
+    }
+  };
+
 
   const handleContentChange = useCallback(() => {
     setState(prev => ({
@@ -60,8 +86,7 @@ const Write = ({ blogWrite }) => {
 
   const handleSubmit = () => {
     blogWrite(state.title, state.subtitle, state.badge, state.image, state.info)
-
-    console.log(state)
+    navigate('/')
   }
 
   return (
@@ -99,12 +124,15 @@ const Write = ({ blogWrite }) => {
       <div className='badge_wrap'>
         <input
           type="text"
-          name={'badge'}
-          value={state.badge}
-          onChange={handleStateChange}
-          placeholder='태그를 입력해주세요.'
+          name="badge"
+          value={state.badgeText} // badgeText를 입력 값으로 사용
+          onChange={handleBadgeInputChange}
+          onKeyPress={handleBadgeInputKeyPress} // Enter 키 눌림 처리
+          placeholder="태그를 입력해주세요."
         />
-        <div className="badge">뱃지123</div>
+          {state.badge?.map((badge, index) => (
+            <div className={'badge'} key={index}>{badge}</div>
+          ))}
       </div>
 
 

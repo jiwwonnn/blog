@@ -1,12 +1,12 @@
 import BlogContent from "./components/BlogContent";
 
-const ContentRight = ({ dummyData }) => {
+const ContentRight = ({data }) => {
 
   return (
     <div className="content_right">
       <input type="text" placeholder='검색어를 입력해라'/>
       <div className="blog_content_wrap">
-        <BlogContent dummyData={dummyData} />
+        <BlogContent data={data}/>
       </div>
     </div>
   )

@@ -56,7 +56,7 @@ const App = () => {
     <div className='blog_wrap'>
       <BrowserRouter>
         <Routes>
-          <Route path={'/'} element={<Blog dummyData={dummyData}/>} />
+          <Route path={'/'} element={<Blog data={data} />} />
           <Route path={'/write'} element={<Write blogWrite={blogWrite}/>} />
         </Routes>
       </BrowserRouter>
