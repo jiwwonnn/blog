@@ -18,11 +18,27 @@ const Write = ({ blogWrite }) => {
   const editorRef = useRef(null)
 
   const [state, setState] = useState({
-    image: '',
+    image: null,
     title: '',
     subtitle: '',
     badge: '',
   })
+
+  // 파일 업로드 관련
+  const upload = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      setState({
+        image: reader.result
+      });
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  };
 
   const [content, setContent] = useState({
     info : ''
@@ -57,11 +73,15 @@ const Write = ({ blogWrite }) => {
   return (
     <div className='write_wrap'>
       <div className="img_wrap">
+        <label htmlFor='fileInput'>파일선택</label>
         <input
+          id='fileInput'
           type="file"
+          onChange={upload}
+          style={{ display: 'none'}}
         />
         <div className="image">
-          <img src="" alt=""/>
+          {state.image && <img src={state.image} alt="썸네일" />}
         </div>
       </div>
       <div className="title_text">

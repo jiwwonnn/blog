@@ -1,7 +1,5 @@
 const BlogContent = ({ dummyData }) => {
 
-  console.log("dummyData", dummyData)
-
   return (
     <>
       {
