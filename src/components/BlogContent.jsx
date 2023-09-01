@@ -1,5 +1,4 @@
 const BlogContent = ({ data }) => {
-
   return (
     <>
       {
@@ -18,7 +17,7 @@ const BlogContent = ({ data }) => {
                   ))
                 }
             </ul>
-            <div className="date">{it.date}</div>
+            <div className="date">{it.newDate}</div>
           </div>
         ))
       }

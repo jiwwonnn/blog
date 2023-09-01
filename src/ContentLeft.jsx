@@ -1,10 +1,10 @@
 import TagItem from "./components/TagItem";
 
-const ContentLeft = () => {
+const ContentLeft = ({data}) => {
   return (
     <div className="content_left">
       <div className="content_title">태그 목록</div>
-      <TagItem />
+      <TagItem data={data}/>
     </div>
   )
 }
