@@ -18,7 +18,7 @@ const Write = ({ blogWrite }) => {
   const editorRef = useRef(null)
 
   const [state, setState] = useState({
-    image: null,
+    image: '',
     title: '',
     subtitle: '',
     badge: '',
@@ -32,6 +32,7 @@ const Write = ({ blogWrite }) => {
 
     reader.onload = () => {
       setState({
+        ...state,
         image: reader.result
       });
     };
@@ -41,9 +42,6 @@ const Write = ({ blogWrite }) => {
     }
   };
 
-  const [content, setContent] = useState({
-    info : ''
-  })
 
   const handleStateChange = (e) => {
     setState({
@@ -52,19 +50,6 @@ const Write = ({ blogWrite }) => {
     })
 
   }
-
-  /*이거는 가 버전
-  const handleContentChange = useCallback(() => {
-    // 객체 안에 동일하게 넣어줘야함
-    // setContent(
-    //   editorRef.current.getInstance().getMarkdown()
-    // );
-    // 이거는 안댐
-
-    setContent({
-      info : editorRef.current.getInstance().getMarkdown()
-    });
-  }, [content])*/
 
   const handleContentChange = useCallback(() => {
     setState(prev => ({
@@ -75,6 +60,8 @@ const Write = ({ blogWrite }) => {
 
   const handleSubmit = () => {
     blogWrite(state.title, state.subtitle, state.badge, state.image, state.info)
+
+    console.log(state)
   }
 
   return (
@@ -84,11 +71,11 @@ const Write = ({ blogWrite }) => {
         <input
           id='fileInput'
           type="file"
-          onChange={upload}
+          onChange={(event) => upload(event)}
           style={{ display: 'none'}}
         />
         <div className="image">
-          {state.image && <img src={state.image} alt="썸네일" />}
+          {state.image ? <img src={state.image} alt="썸네일" /> : null}
         </div>
       </div>
       <div className="title_text">
@@ -139,7 +126,7 @@ const Write = ({ blogWrite }) => {
             ['table', 'image', 'link'],
             ['code', 'codeblock']
           ]}
-        ></Editor>
+        />
       </div>
       <div className="button_wrap">
         <button onClick={handleSubmit}>저장</button>
