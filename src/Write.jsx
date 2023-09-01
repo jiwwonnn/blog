@@ -22,6 +22,7 @@ const Write = ({ blogWrite }) => {
     title: '',
     subtitle: '',
     badge: '',
+    info : '',
   })
 
   // 파일 업로드 관련
@@ -52,6 +53,7 @@ const Write = ({ blogWrite }) => {
 
   }
 
+  /*이거는 가 버전
   const handleContentChange = useCallback(() => {
     // 객체 안에 동일하게 넣어줘야함
     // setContent(
@@ -62,12 +64,17 @@ const Write = ({ blogWrite }) => {
     setContent({
       info : editorRef.current.getInstance().getMarkdown()
     });
-  }, [content])
+  }, [content])*/
+
+  const handleContentChange = useCallback(() => {
+    setState(prev => ({
+      ...prev,
+      info: editorRef.current.getInstance().getMarkdown()
+    }));
+  }, []);
 
   const handleSubmit = () => {
-    blogWrite(state.title, state.subtitle, state.badge, state.image, content.info)
-
-    console.log(state , content)
+    blogWrite(state.title, state.subtitle, state.badge, state.image, state.info)
   }
 
   return (

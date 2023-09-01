@@ -13,8 +13,8 @@ const BlogContent = ({ dummyData }) => {
             <div className="sub_title">{data.subtitle}</div>
             <ul className="badge_wrap">
                 {
-                  data.badgeList.map((badge) => (
-                    <li className="badge">{badge}</li>
+                  data.badgeList.map((badge, idx) => (
+                    <li className="badge" key={idx}>{badge}</li>
                   ))
                 }
             </ul>
