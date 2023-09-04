@@ -2,6 +2,7 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Blog from "./Blog";
 import Write from "./Write";
 import {useRef, useState} from "react";
+import Detail from "./Detail";
 
 const App = () => {
 
@@ -30,26 +31,13 @@ const App = () => {
     setData([newBlogWrite, ...data])
   }
 
+  const blogDelete = (id) => {
+    const newList = data.filter((it) => it.id !== id)
+    setData(newList)
 
-  const dummyData = [
-    {
-      id: 0,
-      image : 'https://picsum.photos/200',
-      title : '더미 타이틀입니다1',
-      subtitle: '더미 서브 타이틀입니다1',
-      badgeList : ["뱃지1-1", "뱃지1-2"],
-      date : '2023-01-01',
-    },
-    {
-      id: 1,
-      image : 'https://picsum.photos/200',
-      title : '더미 타이틀입니다2',
-      subtitle: '더미 서브 타이틀입니다2',
-      badgeList : ["뱃지2-1", "뱃지2-2"],
-      date : '2023-01-02',
-    }
-  ]
-
+    console.log("Deleted item with id:", id);
+    console.log("Updated data:", newList);
+  }
 
 
   return (
@@ -58,6 +46,7 @@ const App = () => {
         <Routes>
           <Route path={'/'} element={<Blog data={data} />} />
           <Route path={'/write'} element={<Write blogWrite={blogWrite}/>} />
+          <Route path={'/detail/:id'} element={<Detail data={data} blogDelete={blogDelete}/>} />
         </Routes>
       </BrowserRouter>
     </div>

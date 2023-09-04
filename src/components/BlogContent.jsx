@@ -1,3 +1,5 @@
+import {Link} from "react-router-dom";
+
 const BlogContent = ({ data }) => {
   return (
     <>
@@ -8,7 +10,7 @@ const BlogContent = ({ data }) => {
               <img src={it.image} alt=""/>
             </div>
             {/*title 클릭하면 상세로 이동*/}
-            <div className="title">{it.title}</div>
+            <Link to={`/detail/${it.id}`}className="title">{it.title}</Link>
             <div className="sub_title">{it.subtitle}</div>
             <ul className="badge_wrap">
                 {
@@ -17,7 +19,7 @@ const BlogContent = ({ data }) => {
                   ))
                 }
             </ul>
-            <div className="date">{it.newDate}</div>
+            <div className="date">{new Date(it.newDate).toLocaleString()}</div>
           </div>
         ))
       }
