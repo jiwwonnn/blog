@@ -6,9 +6,13 @@ const BlogContent = ({ data }) => {
       {
         data.map((it) => (
           <div className='blog_content' key={it.id}>
-            <div className="img_wrap">
-              <img src={it.image} alt=""/>
-            </div>
+            {
+              it.image &&
+              <div className="img_wrap">
+                <img src={it.image} alt=""/>
+              </div>
+            }
+
             {/*title 클릭하면 상세로 이동*/}
             <Link to={`/detail/${it.id}`}className="title">{it.title}</Link>
             <div className="sub_title">{it.subtitle}</div>

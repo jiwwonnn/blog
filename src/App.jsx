@@ -32,11 +32,14 @@ const App = () => {
   }
 
   const blogDelete = (id) => {
-    const newList = data.filter((it) => it.id !== id)
-    setData(newList)
 
-    console.log("Deleted item with id:", id);
-    console.log("Updated data:", newList);
+    console.log(id, "IDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
+
+    setData((prev) => {
+      const newList = prev.filter((it) => it.id !== id)
+      console.log(newList, "NEW LIST"); // 데이터가 올바르게 업데이트되었는지 확인
+      return newList
+    })
   }
 
 

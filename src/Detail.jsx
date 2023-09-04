@@ -1,8 +1,11 @@
 import {useNavigate, useParams} from "react-router-dom";
+import {useEffect, useState} from "react";
 
 const Detail = ({ data, blogDelete }) => {
   const { id } = useParams();
   const navigate = useNavigate()
+
+  const [isDataChanged, setDataChanged] = useState(false); // 데이터 변경 여부 상태 추가
 
 
   // Find the item with the matching id
@@ -13,13 +16,20 @@ const Detail = ({ data, blogDelete }) => {
     return <div>Item not found</div>;
   }
 
+  // 삭제가 전혀 되지 않음
   const handleDelete = (id) => {
     blogDelete(id)
     alert("삭제되었습니다.")
+    setDataChanged(true); // 데이터 변경 여부를 표시
     navigate('/')
-
-    console.log(data, "DATATATATATAT1@#!@#!@#")
+    console.log(data, "handleDataDelete")
   }
+
+  useEffect(() => {
+    if (isDataChanged) {
+      navigate("/");
+    }
+  }, [isDataChanged, navigate]);
 
   return (
     <div className='detail_wrap'>
