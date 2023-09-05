@@ -1,44 +1,9 @@
-// const TagItem = ({ data }) => {
-//
-//   /**
-//     전체보기도 있어야하고
-//     이제 내가 입력한 내용들은 밑에 출력이 되어야하는데
-//     이걸를 어떻게 map 에서 할 수 가 있찌 ?
-//     그리고 내가 입력한 개수는 어떻게 구분을 시키고
-//     클릭했을때 옆에 리스트에 새로이 보여지게 할 수 있을까 ?
-//    */
-//
-//   console.log(data, "DATA!@#")
-//
-//   return (
-//     <ul className="content_list">
-//       <li className="content_item">
-//         전체보기 ({data.length})
-//       </li>
-//       {data.map((item) => (
-//         <li className="content_item" key={item.id}>
-//           <ul className="badge_list">
-//             {item.badgeList.map((badge, index) => (
-//               <li className="badge_item" key={index}>
-//                 {badge} ({badge.length})
-//               </li>
-//             ))}
-//           </ul>
-//         </li>
-//       ))}
-//
-//     </ul>
-//   )
-// }
-//
-// export default TagItem
-
-
 import React from 'react';
 
 const TagItem = ({ data }) => {
   const tagCounts = {};
 
+  // 태그 개수를 계산하는 함수
   const updateTagCount = (tag) => {
     if (tagCounts[tag]) {
       tagCounts[tag] += 1;
@@ -47,33 +12,31 @@ const TagItem = ({ data }) => {
     }
   };
 
+  // 데이터에서 태그 개수 계산
   data.forEach((item) => {
     item.badgeList.forEach((tag) => {
       updateTagCount(tag);
     });
   });
 
-  // Calculate the total count for "전체보기"
+  // 전체보기 개수 계산
   const totalCount = data.length;
 
-  const tagListWithCounts = ['전체보기'].concat(
-    Object.keys(tagCounts)
-      .filter((tag) => tag !== '전체보기')
-      .map((tag) => `${tag} (${tagCounts[tag]})`)
-  );
+  // 전체보기 뱃지 리스트 개수 계산
+  const allBadgeCount = data.reduce((count, item) => count + item.badgeList.length, 0);
 
-  // Add total count to "전체보기" if there are more than one items
-  if (totalCount > 1) {
-    tagListWithCounts[0] = `전체보기 (${totalCount})`;
-  }
+  // 태그 목록과 개수를 생성
+  const tagListWithCounts = Object.keys(tagCounts)
+    .filter((tag) => tag !== '전체보기')
+    .map((tag) => `${tag} (${tagCounts[tag]})`);
 
   return (
     <ul className="content_list">
+      <li className='content_item'>
+        {`전체보기 (${allBadgeCount})`}
+      </li>
       {tagListWithCounts.map((tag, index) => (
-        <li
-          className='content_item'
-          key={index}
-        >
+        <li className='content_item' key={index}>
           {tag}
         </li>
       ))}

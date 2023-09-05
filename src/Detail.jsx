@@ -1,5 +1,4 @@
 import {useNavigate, useParams} from "react-router-dom";
-import {useEffect, useState} from "react";
 
 const Detail = ({ data, blogDelete }) => {
 
@@ -7,7 +6,6 @@ const Detail = ({ data, blogDelete }) => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [isDataChanged, setDataChanged] = useState(false);
 
   const selectedItem = data.find((item) => item.id === parseInt(id));
 
@@ -16,19 +14,10 @@ const Detail = ({ data, blogDelete }) => {
   }
 
   const handleDelete = (id) => {
-    console.log("Deleting item with id:", id); // id 값 확인
-    // 먼저 데이터 변경 여부를 표시
-    setDataChanged(true);
-    // 그 후 데이터 삭제
     blogDelete(id);
     alert("삭제되었습니다.");
+    navigate("/");
   };
-
-  useEffect(() => {
-    if (isDataChanged) {
-      navigate("/");
-    }
-  }, [isDataChanged, navigate]);
 
   return (
     <div className='detail_wrap'>
@@ -45,7 +34,7 @@ const Detail = ({ data, blogDelete }) => {
       <div className="content_text">{selectedItem.info}</div>
       <div className='btn_wrap'>
         <button>수정하기</button>
-        <button onClick={() => handleDelete(id)}>삭제하기</button>
+        <button onClick={() => handleDelete(selectedItem.id)}>삭제하기</button>
       </div>
     </div>
   );

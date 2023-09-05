@@ -4,6 +4,10 @@ const BlogContent = ({ data }) => {
   return (
     <>
       {
+        data.length === 0 &&
+          <div className='nodata'>작성된 글이 없습니다.</div>
+      }
+      {
         data.map((it) => (
           <div className='blog_content' key={it.id}>
             {

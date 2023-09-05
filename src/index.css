@@ -79,7 +79,6 @@ button {
 .blog_content .img_wrap {
   width: 100%;
   height: 300px;
-  border: 1px solid orange;
 }
 .blog_content .img_wrap img {
   width: 100%;
@@ -250,3 +249,13 @@ button {
   border: none;
 }
 
+
+.nodata {
+  background: grey;
+  width: 100%;
+  height:200px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
