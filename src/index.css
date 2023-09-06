@@ -75,6 +75,8 @@ button {
   margin-bottom: 40px;
   border-bottom: 1px solid grey;
   padding-bottom: 40px;
+  display: block;
+  text-decoration: none;
 }
 .blog_content .img_wrap {
   width: 100%;
@@ -91,7 +93,6 @@ button {
   font-weight: bold;
   cursor:pointer;
   color: black;
-  text-decoration: none;
 }
 .blog_content  .sub_title {
   margin-top: 5px;

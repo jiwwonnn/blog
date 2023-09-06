@@ -9,7 +9,7 @@ const BlogContent = ({ data }) => {
       }
       {
         data.map((it) => (
-          <div className='blog_content' key={it.id}>
+          <Link to={`/detail/${it.id}`} className='blog_content' key={it.id}>
             {
               it.image &&
               <div className="img_wrap">
@@ -17,8 +17,7 @@ const BlogContent = ({ data }) => {
               </div>
             }
 
-            {/*title 클릭하면 상세로 이동*/}
-            <Link to={`/detail/${it.id}`}className="title">{it.title}</Link>
+            <p className="title">{it.title}</p>
             <div className="sub_title">{it.subtitle}</div>
             <ul className="badge_wrap">
                 {
@@ -28,7 +27,7 @@ const BlogContent = ({ data }) => {
                 }
             </ul>
             <div className="date">{new Date(it.newDate).toLocaleString()}</div>
-          </div>
+          </Link>
         ))
       }
     </>
