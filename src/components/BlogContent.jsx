@@ -1,14 +1,24 @@
 import {Link} from "react-router-dom";
 
-const BlogContent = ({ data }) => {
+const BlogContent = ({ data, searchKeyword  }) => {
+
+
+  const filteredData = searchKeyword
+    ? data.filter(
+      (item) =>
+        item.title.includes(searchKeyword) || item.info.includes(searchKeyword)
+    )
+    : data;
+
+
   return (
     <>
       {
-        data.length === 0 &&
+        filteredData.length === 0 &&
           <div className='nodata'>작성된 글이 없습니다.</div>
       }
       {
-        data.map((it) => (
+        filteredData.map((it) => (
           <Link to={`/detail/${it.id}`} className='blog_content' key={it.id}>
             {
               it.image &&

@@ -3,6 +3,7 @@ import Blog from "./Blog";
 import Write from "./Write";
 import {useRef, useState} from "react";
 import Detail from "./Detail";
+import Edit from './Edit';
 
 const App = () => {
 
@@ -29,6 +30,14 @@ const App = () => {
     setData(updatedData);
   };
 
+  const blogUpdate = (updatedBlog) => {
+    const updatedData = data.map((item) =>
+      item.id === updatedBlog.id ? updatedBlog : item
+    );
+    setData(updatedData);
+  };
+
+
 
   return (
     <div className='blog_wrap'>
@@ -36,6 +45,7 @@ const App = () => {
         <Routes>
           <Route path={'/'} element={<Blog data={data} />} />
           <Route path={'/write'} element={<Write blogWrite={blogWrite}/>} />
+          <Route path={'/edit/:id'} element={<Edit data={data} blogUpdate={blogUpdate} />} />
           <Route path={'/detail/:id'} element={<Detail data={data} blogDelete={blogDelete} />} />
         </Routes>
       </BrowserRouter>

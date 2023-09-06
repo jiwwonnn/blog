@@ -19,6 +19,10 @@ const Detail = ({ data, blogDelete }) => {
     navigate("/");
   };
 
+  const handleEdit = () => {
+    navigate(`/edit/${selectedItem.id}`);
+  };
+
   return (
     <div className='detail_wrap'>
       <div className="title_wrap">{selectedItem.title}</div>
@@ -33,7 +37,7 @@ const Detail = ({ data, blogDelete }) => {
       </div>
       <div className="content_text">{selectedItem.info}</div>
       <div className='btn_wrap'>
-        <button>수정하기</button>
+        <button onClick={handleEdit}>수정하기</button>
         <button onClick={() => handleDelete(selectedItem.id)}>삭제하기</button>
       </div>
     </div>
