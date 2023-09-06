@@ -1,9 +1,13 @@
 import BlogContent from "./components/BlogContent";
 import {useState} from "react";
 
-const ContentRight = ({data }) => {
+const ContentRight = ({data, selectedTag }) => {
 
   const [searchKeyword, setSearchKeyword] = useState(""); // 검색어 상태
+
+  const filteredData = selectedTag
+    ? data.filter((item) => item.badgeList.includes(selectedTag))
+    : data;
 
 
   return (
@@ -13,7 +17,7 @@ const ContentRight = ({data }) => {
        onChange={(e) => setSearchKeyword(e.target.value)}
       />
       <div className="blog_content_wrap">
-        <BlogContent data={data} searchKeyword={searchKeyword}/>
+        <BlogContent data={filteredData} searchKeyword={searchKeyword}/>
       </div>
     </div>
   )

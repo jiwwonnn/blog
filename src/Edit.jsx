@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import {Editor} from "@toast-ui/react-editor";
 
 const Edit = ({ data, blogUpdate }) => {
+
   const editorRef = useRef(null)
   const { id } = useParams();
   const navigate = useNavigate();
@@ -127,7 +128,7 @@ const Edit = ({ data, blogUpdate }) => {
           previewStyle="vertical" // 미리보기 스타일 지정
           height="350px" // 에디터 창 높이
           initialEditType="wysiwyg" // 초기 입력모드 설정(디폴트 markdown)
-          initialValue= ' '
+          initialValue={state.info}
           ref={editorRef}
           onChange={handleContentChange}
           name={'info'}

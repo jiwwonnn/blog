@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TagItem = ({ data }) => {
+const TagItem = ({ data, selectedTag, handleTagClick }) => {
   const tagCounts = {};
 
   // 태그 개수를 계산하는 함수
@@ -32,11 +32,11 @@ const TagItem = ({ data }) => {
 
   return (
     <ul className="content_list">
-      <li className='content_item'>
+      <li className={`content_item ${selectedTag === '' ? 'active' : ''}`} onClick={() => handleTagClick('')}>
         {`전체보기 (${allBadgeCount})`}
       </li>
       {tagListWithCounts.map((tag, index) => (
-        <li className='content_item' key={index}>
+        <li className={`content_item ${selectedTag === tag.split(' ')[0] ? 'active' : ''}`} key={index} onClick={() => handleTagClick(tag.split(' ')[0])}>
           {tag}
         </li>
       ))}

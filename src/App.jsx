@@ -8,6 +8,7 @@ import Edit from './Edit';
 const App = () => {
 
   const [data, setData] = useState([]);
+  const [selectedTag, setSelectedTag] = useState("");
   const newId = useRef(0);
 
   const blogWrite = (title, subtitle, badgeList, image, info) => {
@@ -37,13 +38,17 @@ const App = () => {
     setData(updatedData);
   };
 
+  const handleTagClick = (tag) => {
+    setSelectedTag(tag);
+  };
+
 
 
   return (
     <div className='blog_wrap'>
       <BrowserRouter>
         <Routes>
-          <Route path={'/'} element={<Blog data={data} />} />
+          <Route path={'/'} element={<Blog data={data} selectedTag={selectedTag} handleTagClick={handleTagClick}/>} />
           <Route path={'/write'} element={<Write blogWrite={blogWrite}/>} />
           <Route path={'/edit/:id'} element={<Edit data={data} blogUpdate={blogUpdate} />} />
           <Route path={'/detail/:id'} element={<Detail data={data} blogDelete={blogDelete} />} />

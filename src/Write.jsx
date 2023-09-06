@@ -7,15 +7,6 @@ import {useNavigate} from "react-router-dom";
 
 const Write = ({ blogWrite }) => {
 
-
-  /**
-   에디터에 name 에러 나오는거랑
-   에디터도 image, title .. 넣는곳에 cotnent 라고 넣고 할 수 있는 방법이 있는지 찾아야할듯
-   따로 관리해야될것 같은데 따로 관리하면 blogWrite 에서 새로 만드는 함수를 만들었는데 여기에 추가를
-   어떻게 해야할지 모르겠음
-   */
-
-
   const editorRef = useRef(null)
   const navigate = useNavigate()
 
