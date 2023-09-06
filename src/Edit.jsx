@@ -4,6 +4,8 @@ import {Editor} from "@toast-ui/react-editor";
 
 const Edit = ({ data, blogUpdate }) => {
 
+
+
   const editorRef = useRef(null)
   const { id } = useParams();
   const navigate = useNavigate();
@@ -14,6 +16,8 @@ const Edit = ({ data, blogUpdate }) => {
   }
 
   const [state, setState] = useState(selectedItem);
+
+
 
   // 파일 업로드 관련
   const upload = (e) => {
@@ -56,10 +60,10 @@ const Edit = ({ data, blogUpdate }) => {
       // Enter 키가 눌렸을 때
       if (state.badgeText.trim() !== "") {
         // 입력 텍스트가 비어 있지 않은 경우에만 처리
-        const updatedBadges = [...state.badge, state.badgeText]; // 새로운 뱃지를 기존 뱃지 목록에 추가
+        const updatedBadges = [...state.badgeList, state.badgeText]; // 새로운 뱃지를 기존 뱃지 목록에 추가
         setState({
           ...state,
-          badge: updatedBadges,
+          badgeList: updatedBadges,
           badgeText: "", // badge 입력 텍스트 지우기
         });
       }
@@ -73,6 +77,16 @@ const Edit = ({ data, blogUpdate }) => {
       info: editorRef.current.getInstance().getMarkdown()
     }));
   }, []);
+
+
+  const handleBadgeDelete = (index) => {
+    const updatedBadges = [...state.badgeList];
+    updatedBadges.splice(index, 1); // 선택한 태그 삭제
+    setState({
+      ...state,
+      badgeList: updatedBadges,
+    });
+  };
 
 
   return (
@@ -116,8 +130,8 @@ const Edit = ({ data, blogUpdate }) => {
           onKeyPress={handleBadgeInputKeyPress} // Enter 키 눌림 처리
           placeholder="태그를 입력해주세요."
         />
-        {state.badge?.map((badge, index) => (
-          <div className={'badge'} key={index}>{badge}</div>
+        {state.badgeList?.map((badge, index) => (
+          <div className={'badge'} key={index} onClick={() => handleBadgeDelete(index)}>{badge}</div>
         ))}
       </div>
 
