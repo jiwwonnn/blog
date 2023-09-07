@@ -157,6 +157,7 @@ const Edit = ({ data, blogUpdate }) => {
         />
       </div>
       <div className="button_wrap">
+        <button onClick={() => navigate(-1)}>취소</button>
         <button onClick={handleSubmit}>저장</button>
       </div>
     </div>

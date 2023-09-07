@@ -45,6 +45,7 @@ const Detail = ({ data, blogDelete }) => {
         ))}
       </div>
       <div className='btn_wrap'>
+        <button onClick={() => navigate(-1)}>이전으로</button>
         <button onClick={handleEdit}>수정하기</button>
         <button onClick={() => handleDelete(selectedItem.id)}>삭제하기</button>
       </div>
