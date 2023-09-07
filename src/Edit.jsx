@@ -128,7 +128,7 @@ const Edit = ({ data, blogUpdate }) => {
           value={state.badgeText} // badgeText를 입력 값으로 사용
           onChange={handleBadgeInputChange}
           onKeyPress={handleBadgeInputKeyPress} // Enter 키 눌림 처리
-          placeholder="태그를 입력해주세요."
+          placeholder="태그를 입력 후 엔터"
         />
         {state.badgeList?.map((badge, index) => (
           <div className={'badge'} key={index} onClick={() => handleBadgeDelete(index)}>{badge}</div>

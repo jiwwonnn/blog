@@ -1,4 +1,5 @@
 import {useNavigate, useParams} from "react-router-dom";
+import {Fragment} from "react";
 
 const Detail = ({ data, blogDelete }) => {
 
@@ -35,7 +36,14 @@ const Detail = ({ data, blogDelete }) => {
       <div className="content_img_wrap">
         <img src={selectedItem.image} alt=""/>
       </div>
-      <div className="content_text">{selectedItem.info}</div>
+      <div className="content_text">
+        {selectedItem.info.split('\n').map((line, idx) => (
+          <Fragment key={idx}>
+            {line}
+            <br />
+          </Fragment>
+        ))}
+      </div>
       <div className='btn_wrap'>
         <button onClick={handleEdit}>수정하기</button>
         <button onClick={() => handleDelete(selectedItem.id)}>삭제하기</button>
